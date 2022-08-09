@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, TIMESTAMP, BOOLEAN, BigInteger
+from sqlalchemy.dialects.postgresql import UUID
 from app.db.session import Base
 
 
@@ -6,6 +7,7 @@ class User(Base):
     __tablename__ = "users"
     __table_args__ = {"schema": "public"}
     id = Column("id", BigInteger, primary_key=True, index=True, autoincrement=True, unique=True, nullable=False)
+    uuid = Column("uuid", UUID(as_uuid=True), primary_key=True, unique=True, nullable=False)
     email = Column("email", String, unique=True)
     emailVerified = Column("email_verified", BOOLEAN, nullable=False)
     phone = Column("phone", String, unique=True)
@@ -18,3 +20,14 @@ class User(Base):
     lastLoginAt = Column("last_login_at", TIMESTAMP)
     deletedAt = Column("deleted_at", TIMESTAMP)
     emailVerifiedAt = Column("email_verified_at", TIMESTAMP)
+    phoneVerifiedAt = Column("phone_verified_at", TIMESTAMP)
+
+
+class EmailMessages(Base):
+    __tablename__ = "Email_messages"
+    __table_args__ = {"schema": "public"}
+    id = Column("id", BigInteger, primary_key=True, index=True, autoincrement=True, unique=True, nullable=False)
+    email = Column("phone", String)
+    validateCode = Column("validate_code", String)
+    emailValidate = Column("email_validate", BOOLEAN, nullable=False)
+    createdAt = Column("created_at", TIMESTAMP, nullable=False)
