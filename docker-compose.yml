@@ -1,8 +1,8 @@
 version: "3.9"
 services:
   app:
-    image: Serv_in_pock_back
-    container_name: Serv_in_pock_back
+    image: serv_in_pock_back
+    container_name: serv_in_pock_back
     restart: always
     ports:
       - 6448:8000
