@@ -10,7 +10,7 @@ class User(Base):
     uuid = Column("uuid", UUID(as_uuid=True), primary_key=True, unique=True, nullable=False)
     email = Column("email", String, unique=True)
     emailVerified = Column("email_verified", BOOLEAN, nullable=False)
-    phone = Column("phone", String, unique=True)
+    phone = Column("phone", String)
     phoneVerified = Column("phone_verified", BOOLEAN, nullable=False)
     password = Column("password", String)
     name = Column("name", String)

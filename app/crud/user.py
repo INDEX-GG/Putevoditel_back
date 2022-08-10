@@ -17,7 +17,7 @@ def create_user(db: Session, user: user_schema.UserCreate):
         return False
     db_user = User(uuid=uuid.uuid4(),
                    email=user.email,
-                   emailVerified=False,
+                   emailVerified=True,
                    phoneVerified=False,
                    password=security.hash_password(user.password),
                    name=user.name,
@@ -46,3 +46,35 @@ def get_current_user(db: Session = Depends(dependencies.get_db),
     if not User:
         raise security.credentials_exception
     return user
+
+
+def authenticate_user(db: Session, username: str, password: str):
+    db_user: User = get_user_by_email(db=db, email=username)
+    if not db_user:
+        return False
+    if not security.verify_password(password, db_user.password):
+        return False
+    db_user.lastLoginAt = datetime.datetime.utcnow()
+    db.commit()
+    return db_user
+
+
+def change_user_password(db: Session, user: User, new_password: str):
+    user.password = new_password
+    db.commit()
+
+
+def change_user_data(db: Session, user: User, user_data: user_schema.ChangeUser):
+    if user_data.phone:
+        user.phone = user_data.phone
+    if user_data.name:
+        user.name = user_data.name
+    if user_data.surname:
+        user.surname = user_data.surname
+    if user_data.patronymic:
+        user.patronymic = user_data.patronymic
+    if user_data.birthday:
+        user.birthday = user_data.birthday
+    if user_data.password:
+        user.password = security.hash_password(user_data.password)
+    db.commit()
