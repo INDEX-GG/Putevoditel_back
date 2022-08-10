@@ -20,7 +20,8 @@ async def check_email_registration(email: str = Path(),
     return response_schema.ResponseCheckEmailRegistration(emailRegistration=False)
 
 
-@router.get("/sendVerificationCode/{email}", summary="Call to phone",
+@router.get("/sendVerificationCode/{email}",
+            summary="Call to phone",
             response_model=response_schema.ResponseSuccess,
             responses={409: custom_errors("Conflict", [{"msg": "User with this email already exist"}]),
                        400: custom_errors("Bad Request", [{"msg": "Usage limit exceeded"},
@@ -32,16 +33,17 @@ async def call_phone(email: str = Path(),
     if not check_count_of_calls:
         raise HTTPException(status_code=400, detail={"msg": "usage limit exceeded"})
     code = email_sending.generate_code()
-    sending = email_sending.send_email_message(to_addr=email,
-                                               html_template=email_sending.get_code_html_template(code),
-                                               subject="Подтверждение почтового адреса ")
-    if not sending:
-        raise HTTPException(status_code=400, detail={"msg": "Hardware or services problems"})
+    # sending = email_sending.send_email_message(to_addr=email,
+    #                                            html_template=email_sending.get_code_html_template(code),
+    #                                            subject="Подтверждение почтового адреса ")
+    # if not sending:
+    #     raise HTTPException(status_code=400, detail={"msg": "Hardware or services problems"})
     email_message_crud.create_message(email=email, verification_code=code, db=db)
     return {"msg": "success"}
 
 
-@router.get("/check_verification_code/{email}/{code}", summary="Check Verification Code",
+@router.get("/check_verification_code/{email}/{code}",
+            summary="Check Verification Code",
             response_model=response_schema.EmailToken,
             responses={400: custom_errors("Bad Request", [{"msg": "number of attempts exceeded"},
                                                           {"msg": "wrong verification code"}])

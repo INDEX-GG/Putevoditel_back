@@ -5,6 +5,7 @@ from app.db.db_models import Base
 from app.api.v1.aggregator import api_router
 from app.core.config import settings
 
+# Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, TIMESTAMP, BOOLEAN, BigInteger
+from sqlalchemy import Column, String, TIMESTAMP, BOOLEAN, BigInteger, DATE
 from sqlalchemy.dialects.postgresql import UUID
 from app.db.session import Base
 
@@ -15,6 +15,8 @@ class User(Base):
     password = Column("password", String)
     name = Column("name", String)
     surname = Column("surname", String)
+    patronymic = Column("patronymic", String)
+    birthday = Column("birthday", DATE)
     createdAt = Column("created_at", TIMESTAMP, nullable=False)
     updatedAt = Column("updated_at", TIMESTAMP)
     lastLoginAt = Column("last_login_at", TIMESTAMP)
