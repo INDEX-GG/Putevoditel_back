@@ -23,3 +23,7 @@ class ResponseLogin(BaseModel):
 
 class AccessToken(BaseModel):
     accessToken: str
+
+
+class EmailToken(BaseModel):
+    emailToken: str

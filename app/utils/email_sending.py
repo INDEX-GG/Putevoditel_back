@@ -1,8 +1,14 @@
 import smtplib
+import random
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr
 from app.core.config import settings
+
+
+def generate_code():
+    code = random.randint(100000, 999999)
+    return code
 
 
 def send_email_message(to_addr: str, subject: str, html_template: str):

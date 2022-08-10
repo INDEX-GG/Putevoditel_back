@@ -24,10 +24,18 @@ class User(Base):
 
 
 class EmailMessages(Base):
-    __tablename__ = "Email_messages"
+    __tablename__ = "email_messages"
     __table_args__ = {"schema": "public"}
     id = Column("id", BigInteger, primary_key=True, index=True, autoincrement=True, unique=True, nullable=False)
     email = Column("phone", String)
     validateCode = Column("validate_code", String)
     emailValidate = Column("email_validate", BOOLEAN, nullable=False)
+    createdAt = Column("created_at", TIMESTAMP, nullable=False)
+
+
+class EmailVerifyUnsuccessfulTry(Base):
+    __tablename__ = "email_verify_unsuccessful_try"
+    __table_args__ = {"schema": "public"}
+    id = Column("id", BigInteger, primary_key=True, index=True, autoincrement=True, unique=True, nullable=False)
+    email = Column("email", String)
     createdAt = Column("created_at", TIMESTAMP, nullable=False)
