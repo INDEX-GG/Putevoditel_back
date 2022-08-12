@@ -33,11 +33,11 @@ async def call_phone(email: str = Path(),
     if not check_count_of_calls:
         raise HTTPException(status_code=400, detail={"msg": "usage limit exceeded"})
     code = email_sending.generate_code()
-    # sending = email_sending.send_email_message(to_addr=email,
-    #                                            html_template=email_sending.get_code_html_template(code),
-    #                                            subject="Подтверждение почтового адреса ")
-    # if not sending:
-    #     raise HTTPException(status_code=400, detail={"msg": "Hardware or services problems"})
+    sending = email_sending.send_email_message(to_addr=email,
+                                               html_template=email_sending.get_code_html_template(code),
+                                               subject="Подтверждение почтового адреса ")
+    if not sending:
+        raise HTTPException(status_code=400, detail={"msg": "Hardware or services problems"})
     email_message_crud.create_message(email=email, verification_code=code, db=db)
     return {"msg": "success"}
 
