@@ -16,7 +16,7 @@ def create_user(db: Session, user: user_schema.UserCreate):
     if get_user_by_email(db=db, email=user.email):
         return False
     db_user = User(uuid=uuid.uuid4(),
-                   email=user.email,
+                   email=user.email.lstrip().rstrip(),
                    emailVerified=True,
                    phoneVerified=False,
                    password=security.hash_password(user.password),
