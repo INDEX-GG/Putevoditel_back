@@ -20,7 +20,7 @@ async def registration(user_data: user_schema.UserCreateRequest,
     user = user_schema.UserCreate(**user_data.__dict__, email=user_email)
     new_user = user_crud.create_user(user=user, db=db)
     if not new_user:
-        raise HTTPException(status_code=409, detail={"msg": "User with this phone already exist"})
+        raise HTTPException(status_code=409, detail={"msg": "User with this email already exist"})
     return {"msg": "success"}
 
 

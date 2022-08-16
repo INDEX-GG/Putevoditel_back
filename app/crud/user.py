@@ -20,10 +20,15 @@ def create_user(db: Session, user: user_schema.UserCreate):
                    emailVerified=True,
                    phoneVerified=False,
                    password=security.hash_password(user.password),
+                   phone=user.phone,
                    name=user.name,
                    surname=user.surname,
                    patronymic=user.patronymic,
                    birthday=user.birthday,
+                   passport=user.passport,
+                   address=user.address,
+                   familyComposition=user.familyComposition,
+                   gender=user.gender,
                    createdAt=datetime.datetime.utcnow())
     db.add(db_user)
     db.commit()

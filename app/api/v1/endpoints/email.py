@@ -26,7 +26,7 @@ async def check_email_registration(email: str = Path(),
             responses={409: custom_errors("Conflict", [{"msg": "User with this email already exist"}]),
                        400: custom_errors("Bad Request", [{"msg": "Usage limit exceeded"},
                                                           {"msg": "Hardware or services problems"}])})
-async def call_phone(email: str = Path(),
+async def send_email(email: str = Path(),
                      db: Session = Depends(get_db)):
     check_count_of_calls = email_message_crud.check_count_of_messages(email=email, max_count_of_calls_in_period=10,
                                                                       time_period_in_minutes=30, db=db)
