@@ -80,6 +80,13 @@ def change_user_data(db: Session, user: User, user_data: user_schema.ChangeUser)
         user.patronymic = user_data.patronymic
     if user_data.birthday:
         user.birthday = user_data.birthday
-    if user_data.password:
-        user.password = security.hash_password(user_data.password)
+    if user_data.address:
+        user.address = user_data.address
+    if user_data.passport:
+        user.passport = user_data.passport
+    if user_data.familyComposition:
+        user.familyComposition = user_data.familyComposition
+    if user_data.gender:
+        user.gender = user_data.gender
+
     db.commit()
