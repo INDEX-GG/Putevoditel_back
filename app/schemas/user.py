@@ -52,7 +52,10 @@ class ChangeUser(BaseModel):
     surname: str | None = None
     patronymic: str | None = None
     birthday: datetime.date | None = None
-    password: str | None = None
+    passport: str | None = None
+    address: str | None = None
+    familyComposition: str | None = None
+    gender: Literal["male", "female"] | None = None
 
     class Config:
         orm_mode = True
