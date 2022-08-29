@@ -1,5 +1,3 @@
-import os
-
 from fastapi import APIRouter
 from fastapi.responses import FileResponse
 from docxtpl import DocxTemplate
@@ -35,4 +33,5 @@ def qwe(filename,
     doc.render(context)
     doc.save('files/generated/' + filename + '.docx')
 
-    return FileResponse('files/generated/' + filename + '.docx', media_type='application/msword')
+    return FileResponse('files/generated/' + filename + '.docx',
+                        media_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
