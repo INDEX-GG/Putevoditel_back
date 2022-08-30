@@ -6,7 +6,7 @@ router = APIRouter(prefix='/files', tags=['Files'])
 
 
 @router.get('/{filename}')
-def qwe(filename,
+def files(filename,
         name: str = '',
         surname: str = '',
         patronymic: str = '',
@@ -18,7 +18,6 @@ def qwe(filename,
         familyComposition: str = '',
         birthday: str = '',
         gender: str = ''):
-    doc = DocxTemplate('files/templates/' + filename + '.docx')
     context = {'name': name,
                'surname': surname,
                'patronymic': patronymic,
@@ -30,6 +29,7 @@ def qwe(filename,
                'familyComposition': familyComposition,
                'birthday': birthday,
                'gender': gender}
+    doc = DocxTemplate('/var/www/Putevoditel_back/files/templates/' + filename + '.docx')
     doc.render(context)
     doc.save('files/generated/' + filename + '.docx')
 
