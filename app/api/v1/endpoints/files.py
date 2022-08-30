@@ -7,17 +7,17 @@ router = APIRouter(prefix='/files', tags=['Files'])
 
 @router.get('/{filename}')
 def files(filename,
-        name: str = '',
-        surname: str = '',
-        patronymic: str = '',
-        phone: str = '',
-        passport: str = '',
-        seria: str = '',
-        nomer: str = '',
-        address: str = '',
-        familyComposition: str = '',
-        birthday: str = '',
-        gender: str = ''):
+          name: str = '',
+          surname: str = '',
+          patronymic: str = '',
+          phone: str = '',
+          passport: str = '',
+          seria: str = '',
+          nomer: str = '',
+          address: str = '',
+          familyComposition: str = '',
+          birthday: str = '',
+          gender: str = ''):
     context = {'name': name,
                'surname': surname,
                'patronymic': patronymic,
