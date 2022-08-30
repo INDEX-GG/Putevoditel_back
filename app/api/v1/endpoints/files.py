@@ -29,9 +29,9 @@ def files(filename,
                'familyComposition': familyComposition,
                'birthday': birthday,
                'gender': gender}
-    doc = DocxTemplate('/var/www/Putevoditel_back/files/templates/' + filename + '.docx')
+    doc = DocxTemplate('app/files/templates/' + filename + '.docx')
     doc.render(context)
-    doc.save('files/generated/' + filename + '.docx')
+    doc.save('app/files/generated/' + filename + '.docx')
 
-    return FileResponse('files/generated/' + filename + '.docx',
+    return FileResponse('app/files/generated/' + filename + '.docx',
                         media_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
