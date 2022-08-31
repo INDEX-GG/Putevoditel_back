@@ -19,12 +19,14 @@ def files(filename):
                'familyComposition': '',
                'birthday': '',
                'gender': ''}
+
     doc = DocxTemplate('app/files/templates/' + filename + '.docx')
     doc.render(context)
     doc.save('app/files/generated/' + filename + '.docx')
 
     return FileResponse('app/files/generated/' + filename + '.docx',
-                        media_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+                        media_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        filename=filename + '.docx')
 
 
 @router.post('/{filename}')
@@ -42,6 +44,7 @@ def files(filename, user: ChangeUser):
                'familyComposition': user.familyComposition,
                'birthday': user.birthday,
                'gender': user.gender}
+
     doc = DocxTemplate('app/files/templates/' + filename + '.docx')
     doc.render(context)
     doc.save('app/files/generated/' + filename + '.docx')
