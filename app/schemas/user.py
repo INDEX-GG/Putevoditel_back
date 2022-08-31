@@ -13,7 +13,7 @@ class UserCreateRequest(BaseModel):
     passport: str | None = None
     address: str | None = None
     familyComposition: str | None = None
-    gender: Literal["male", "female"] | None = None
+    gender: Literal["male", "female", "None"] | None = None
     password: str
 
     class Config:
@@ -36,7 +36,7 @@ class UserOut(BaseModel):
     passport: str | None = None
     address: str | None = None
     familyComposition: str | None = None
-    gender: Literal["male", "female"] | None = None
+    gender: Literal["male", "female", "None"] | None = None
     emailVerified: bool
     phoneVerified: bool
     createdAt: datetime.datetime
@@ -55,7 +55,7 @@ class ChangeUser(BaseModel):
     passport: str | None = None
     address: str | None = None
     familyComposition: str | None = None
-    gender: Literal["male", "female"] | None = None
+    gender: Literal["male", "female", "None"] | None = None
 
     class Config:
         orm_mode = True

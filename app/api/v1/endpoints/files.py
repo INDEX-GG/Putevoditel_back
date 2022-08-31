@@ -31,9 +31,12 @@ def files(filename):
 
 @router.post('/{filename}')
 def files(filename, user: ChangeUser):
-    if user.passport is None:
+    if user.passport is not None:
         seria = user.passport[:4]
         nomer = user.passport[5:]
+    else:
+        seria = ''
+        nomer = ''
 
     if user.gender == 'male':
         gender = 'Мужчина'
@@ -42,7 +45,7 @@ def files(filename, user: ChangeUser):
     else:
         gender = ''
 
-    if user.birthday is None:
+    if user.birthday == '3000-01-01':
         birthday = ''
     else:
         birthday = user.birthday
