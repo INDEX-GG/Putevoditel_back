@@ -31,8 +31,22 @@ def files(filename):
 
 @router.post('/{filename}')
 def files(filename, user: ChangeUser):
-    seria = user.passport[:4]
-    nomer = user.passport[5:]
+    if user.passport is None:
+        seria = user.passport[:4]
+        nomer = user.passport[5:]
+
+    if user.gender == 'male':
+        gender = 'Мужчина'
+    elif user.gender == 'female':
+        gender = 'Девушка'
+    else:
+        gender = ''
+
+    if user.birthday is None:
+        birthday = ''
+    else:
+        birthday = user.birthday
+
     context = {'name': user.name,
                'surname': user.surname,
                'patronymic': user.patronymic,
@@ -42,8 +56,10 @@ def files(filename, user: ChangeUser):
                'nomer': nomer,
                'address': user.address,
                'familyComposition': user.familyComposition,
-               'birthday': user.birthday,
-               'gender': user.gender}
+               'birthday': birthday,
+               'gender': gender}
+
+    print(context)
 
     doc = DocxTemplate('app/files/templates/' + filename + '.docx')
     doc.render(context)
