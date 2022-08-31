@@ -29,15 +29,15 @@ def files(filename):
 
 @router.post('/{filename}')
 def files(filename, user: ChangeUser):
-    # seria =
-    # nomer =
+    seria = user.passport[:4]
+    nomer = user.passport[5:]
     context = {'name': user.name,
                'surname': user.surname,
                'patronymic': user.patronymic,
                'phone': user.phone,
                'passport': user.passport,
-               'seria': '',
-               'nomer': '',
+               'seria': seria,
+               'nomer': nomer,
                'address': user.address,
                'familyComposition': user.familyComposition,
                'birthday': user.birthday,
@@ -48,4 +48,4 @@ def files(filename, user: ChangeUser):
 
     return FileResponse('app/files/generated/' + filename + '.docx',
                         media_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                        filename=filename + 'docx')
+                        filename=filename + '.docx')
