@@ -18,6 +18,15 @@ def files(filename,
           familyComposition: str = '',
           birthday: str = '',
           gender: str = ''):
+    name = name.replace('"', '')
+    surname = surname.replace('"', '')
+    patronymic = patronymic.replace('"', '')
+    phone = phone.replace('"', '')
+    passport = passport.replace('"', '')
+    address = address.replace('"', '')
+    familyComposition = familyComposition.replace('"', '')
+    birthday = birthday.replace('"', '')
+    gender = gender.replace('"', '')
 
     if gender == 'male':
         gender = 'Мужчина'
@@ -75,8 +84,6 @@ def files(filename, user: ChangeUser):
                'familyComposition': user.familyComposition,
                'birthday': birthday,
                'gender': gender}
-
-    print(context)
 
     doc = DocxTemplate('app/files/templates/' + filename + '.docx')
     doc.render(context)
