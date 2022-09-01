@@ -8,18 +8,32 @@ router = APIRouter(prefix='/files', tags=['Files'])
 
 
 @router.get('/{filename}')
-def files(filename):
-    context = {'name': '',
-               'surname': '',
-               'patronymic': '',
-               'phone': '',
-               'passport': '',
-               'seria': '',
-               'nomer': '',
-               'address': '',
-               'familyComposition': '',
-               'birthday': '',
-               'gender': ''}
+def files(filename,
+          name: str = '',
+          surname: str = '',
+          patronymic: str = '',
+          phone: str = '',
+          passport: str = '',
+          address: str = '',
+          familyComposition: str = '',
+          birthday: str = '',
+          gender: str = ''):
+
+    seria = '' if passport is None else passport[:4]
+    nomer = '' if passport is None else passport[5:]
+    birthday_new = '' if birthday == datetime.date(3000, 1, 1) else birthday
+
+    context = {'name': name,
+               'surname': surname,
+               'patronymic': patronymic,
+               'phone': phone,
+               'passport': passport,
+               'seria': seria,
+               'nomer': nomer,
+               'address': address,
+               'familyComposition': familyComposition,
+               'birthday': birthday_new,
+               'gender': gender}
 
     doc = DocxTemplate('app/files/templates/' + filename + '.docx')
     doc.render(context)
