@@ -19,6 +19,13 @@ def files(filename,
           birthday: str = '',
           gender: str = ''):
 
+    if gender == 'male':
+        gender = 'Мужчина'
+    elif gender == 'female':
+        gender = 'Девушка'
+    else:
+        gender = ''
+
     seria = '' if passport is None else passport[:4]
     nomer = '' if passport is None else passport[5:]
     birthday_new = '' if birthday == datetime.date(3000, 1, 1) else birthday
